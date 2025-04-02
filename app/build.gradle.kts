@@ -54,6 +54,8 @@ dependencies {
     implementation(libs.androidx.navigation.runtime.android)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.androidx.adaptive.android)
+    implementation(libs.androidx.storage)
+    //implementation(libs.androidx.material3.adaptive.android)
     implementation(libs.androidx.window.core.android)
     implementation(libs.accompanist.swiperefresh)
     testImplementation(libs.junit)
@@ -63,4 +65,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    //Call AsyncImage
+    implementation("io.coil-kt:coil-compose:2.4.0")
+    implementation(libs.coil.compose)
+
+
 }
