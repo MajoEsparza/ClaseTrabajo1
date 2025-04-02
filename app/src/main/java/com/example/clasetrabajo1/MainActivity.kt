@@ -3,45 +3,44 @@ package com.example.clasetrabajo1
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.clasetrabajo1.ui.theme.ClaseTrabajo1Theme
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.clasetrabajo1.ui.screens.ComponentsScreen
+import com.example.clasetrabajo1.ui.screens.HomeScreen
+import com.example.clasetrabajo1.ui.screens.InterfaceScreen
+import com.example.clasetrabajo1.ui.screens.MainMenuScreen
+import com.example.clasetrabajo1.ui.screens.TestScreen
+import com.example.clasetrabajo1.ui.theme.ClaseTrabajoTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContent {
-            ClaseTrabajo1Theme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+            ClaseTrabajoTheme {
+                ComposeMultiScreenApp()
             }
         }
     }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun ComposeMultiScreenApp(){
+    val navController = rememberNavController()
+    SetupNavGraph(navController = navController)
 }
 
-@Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
-    ClaseTrabajo1Theme {
-        Greeting("Android")
+fun SetupNavGraph(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = "mainMenu") {
+//add route name for every screen
+        composable("mainMenu") { MainMenuScreen(navController) }
+        composable("homeScreen") { HomeScreen(navController) }
+        composable("testScreen") { TestScreen(navController) }
+        composable("interfaceScreen") { InterfaceScreen(navController) }
+        composable("componentsScreen"){ ComponentsScreen(navController) }
     }
+
 }
