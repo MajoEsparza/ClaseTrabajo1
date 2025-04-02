@@ -44,6 +44,8 @@ android {
 dependencies {
 
     implementation(libs.androidx.core.ktx)
+    implementation("androidx.compose.material:material:1.3.0")
+    implementation("androidx.compose.material3:material3:1.1.1")
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
     implementation(platform(libs.androidx.compose.bom))
@@ -68,6 +70,14 @@ dependencies {
     //Call AsyncImage
     implementation("io.coil-kt:coil-compose:2.4.0")
     implementation(libs.coil.compose)
+    // retrofit
+    implementation(libs.jakewharton.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.retrofit)
+    implementation(libs.okhttp)
+    implementation(libs.kotlinx.serialization.json)
+    implementation(libs.converter.gson)
+    //
+    implementation (libs.androidx.lifecycle.runtime.ktx.v262)
 
 
 }
