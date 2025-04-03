@@ -1,9 +1,8 @@
 package com.example.clasetrabajo1.ui.screens
 
 import android.content.Context
+import android.util.Log
 import android.widget.Toast
-import androidx.compose.foundation.background
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
@@ -17,14 +16,11 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
-import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -34,10 +30,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import coil.compose.AsyncImage
+import com.example.clasetrabajo1.data.ViewModel.UserViewModel
+import com.example.clasetrabajo1.data.model.UserModel
 
 @Composable
 fun LoginScreen(navController: NavController){
@@ -53,9 +51,9 @@ fun LoginScreen(navController: NavController){
     }
 }
 
-@Preview(showBackground = true)
+//Preview(showBackground = true)
 @Composable
-fun LoginForm(){
+fun LoginForm(viewModel: UserViewModel = viewModel()){
     val context = LocalContext.current
     Card(
         colors = CardDefaults.cardColors(
@@ -119,7 +117,7 @@ fun LoginForm(){
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
                 shape = CutCornerShape(4.dp),
-                onClick = { tryLogin(user, password, context) }
+                onClick = { tryLogin(user, password, context, viewModel) }
             ) {
                 Text("LOG IN")
             }
@@ -141,12 +139,18 @@ fun LoginForm(){
     }
 }
 
-fun tryLogin(user: String, password: String, context: Context){
+fun tryLogin(user: String, password: String, context: Context, viewModel: UserViewModel){
     if(user == "" || password == ""){
         Toast.makeText(
             context,
             "User or Password cannot be empty",
             Toast.LENGTH_SHORT
         ).show()
+    } else {
+        val user_Model = UserModel(0,"", user, password)
+        viewModel.loginApi(user_Model){ jsonResponse ->
+            val loginStatus = jsonResponse?.get("Login")?.asString
+            Log.d("debug", "LOGIN STATUS: $loginStatus")
+        }
     }
 }
