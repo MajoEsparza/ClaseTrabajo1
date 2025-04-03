@@ -3,6 +3,7 @@ package com.example.clasetrabajo1.ui.screens
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.material3.Card
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.runtime.Composable
@@ -42,18 +43,19 @@ fun LoginScreen(navController: NavController){
     Column(
         modifier = Modifier
             .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background)
             .verticalScroll(rememberScrollState()),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ){
         //Text("Login Screen")
-        LoginForm()
+        LoginForm(navController)
     }
 }
 
 //Preview(showBackground = true)
 @Composable
-fun LoginForm(viewModel: UserViewModel = viewModel()){
+fun LoginForm(navController: NavController, viewModel: UserViewModel = viewModel()){
     val context = LocalContext.current
     Card(
         colors = CardDefaults.cardColors(
@@ -117,7 +119,7 @@ fun LoginForm(viewModel: UserViewModel = viewModel()){
                     .fillMaxWidth()
                     .padding(0.dp, 10.dp),
                 shape = CutCornerShape(4.dp),
-                onClick = { tryLogin(user, password, context, viewModel) }
+                onClick = { tryLogin(user, password, context, viewModel, navController) }
             ) {
                 Text("LOG IN")
             }
@@ -139,7 +141,7 @@ fun LoginForm(viewModel: UserViewModel = viewModel()){
     }
 }
 
-fun tryLogin(user: String, password: String, context: Context, viewModel: UserViewModel){
+fun tryLogin(user: String, password: String, context: Context, viewModel: UserViewModel, navController: NavController){
     if(user == "" || password == ""){
         Toast.makeText(
             context,
@@ -151,6 +153,9 @@ fun tryLogin(user: String, password: String, context: Context, viewModel: UserVi
         viewModel.loginApi(user_Model){ jsonResponse ->
             val loginStatus = jsonResponse?.get("Login")?.asString
             Log.d("debug", "LOGIN STATUS: $loginStatus")
+            if(loginStatus == "success"){
+                navController.navigate("accounts_screen")
+            }
         }
     }
 }
