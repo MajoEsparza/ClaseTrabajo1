@@ -14,6 +14,7 @@ import com.example.clasetrabajo1.ui.screens.HomeScreen
 import com.example.clasetrabajo1.ui.screens.InterfaceScreen
 import com.example.clasetrabajo1.ui.screens.LoginScreen
 import com.example.clasetrabajo1.ui.screens.MainMenuScreen
+import com.example.clasetrabajo1.ui.screens.ManageAccountScreen
 import com.example.clasetrabajo1.ui.screens.TestScreen
 import com.example.clasetrabajo1.ui.theme.ClaseTrabajoTheme
 
@@ -45,6 +46,6 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("componentsScreen"){ ComponentsScreen(navController) }
         composable("loginScreen") { LoginScreen(navController) }
         composable("accoutsScreen") { AccountsScreen(navController) }
+        composable ("manage_account_screen") { ManageAccountScreen(navController) }
     }
-
 }

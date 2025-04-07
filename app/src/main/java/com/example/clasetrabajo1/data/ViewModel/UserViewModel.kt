@@ -18,7 +18,7 @@ class UserViewModel:ViewModel(){
                 if(response.isSuccessful){
                     val jsonResponse = response.body()
                     Log.d("debug", response.body().toString())
-                    onResult(jsonResponse)
+                    onResult(jsonResponse as JsonObject?)
                 } else {
                     Log.d("debug", "Error: ${response.body()}")
                     onResult(null)
