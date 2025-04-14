@@ -37,6 +37,7 @@ import androidx.navigation.NavController
 import coil.compose.AsyncImage
 import com.example.clasetrabajo1.data.ViewModel.UserViewModel
 import com.example.clasetrabajo1.data.model.UserModel
+import kotlin.text.get
 
 @Composable
 fun LoginScreen(navController: NavController){
@@ -48,12 +49,10 @@ fun LoginScreen(navController: NavController){
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceEvenly
     ){
-        //Text("Login Screen")
         LoginForm(navController)
     }
 }
 
-//Preview(showBackground = true)
 @Composable
 fun LoginForm(navController: NavController, viewModel: UserViewModel = viewModel()){
     val context = LocalContext.current
@@ -151,10 +150,10 @@ fun tryLogin(user: String, password: String, context: Context, viewModel: UserVi
     } else {
         val user_Model = UserModel(0,"", user, password)
         viewModel.loginApi(user_Model){ jsonResponse ->
-            val loginStatus = jsonResponse?.get("Login")?.asString
+            val loginStatus = jsonResponse?.get("login")?.asString
             Log.d("debug", "LOGIN STATUS: $loginStatus")
             if(loginStatus == "success"){
-                navController.navigate("accounts_screen")
+                navController.navigate("accoutsScreen")
             }
         }
     }
