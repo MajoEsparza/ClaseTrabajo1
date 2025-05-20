@@ -10,6 +10,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.clasetrabajo1.ui.screens.AccountsScreen
+import com.example.clasetrabajo1.ui.screens.Camera
 import com.example.clasetrabajo1.ui.screens.ComponentsScreen
 import com.example.clasetrabajo1.ui.screens.FavoriteAccountsScreen
 import com.example.clasetrabajo1.ui.screens.HomeScreen
@@ -40,7 +41,7 @@ fun ComposeMultiScreenApp()
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "loginScreen") {
+    NavHost(navController = navController, startDestination = "mainMenu") {
 //add route name for every screen
         composable("mainMenu") { MainMenuScreen(navController) }
         composable("homeScreen") { HomeScreen(navController) }
@@ -50,6 +51,7 @@ fun SetupNavGraph(navController: NavHostController) {
         composable("loginScreen") { LoginScreen(navController) }
         composable("accoutsScreen") { AccountsScreen(navController) }
         composable ("manage_account_screen") { ManageAccountScreen(navController) }
+        composable("Camara_Screen") {Camera(navController) }
         composable(
             route = "manage_account_screen/{id}",
             arguments = listOf(navArgument("id") { defaultValue = -1 })
