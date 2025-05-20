@@ -9,6 +9,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.composable
 
 @Composable
 
@@ -64,5 +65,30 @@ fun MainMenuScreen(navController: NavHostController) {
         ) {
             Text("Go to Favorite Account Screen")
         }
+        Button(
+            onClick = {navController.navigate("favoritesScreen")}
+        ) {
+            Text("Go to Favorite Account Screen")
+        }
+        Button(
+            onClick = {navController.navigate("Camara_Screen")}
+        )
+        {
+            Text("Go to Camera")
+        }
+        Button(
+            onClick = {navController.navigate("Calendar_Screen")}
+        )
+        {
+            Text("Go to Calendar")
+        }
+        Button(
+            onClick = {navController.navigate("biometric_screen")}
+        )
+        {
+            Text("Go to Biometric")
+        }
+
+
     }
 }
