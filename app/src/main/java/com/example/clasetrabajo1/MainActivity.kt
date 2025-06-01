@@ -46,7 +46,7 @@ fun ComposeMultiScreenApp()
 
 @Composable
 fun SetupNavGraph(navController: NavHostController) {
-    NavHost(navController = navController, startDestination = "mainMenu") {
+    NavHost(navController = navController, startDestination = "componentsScreen") {
 //add route name for every screen
         composable("mainMenu") { MainMenuScreen(navController) }
         composable("homeScreen") { HomeScreen(navController) }
